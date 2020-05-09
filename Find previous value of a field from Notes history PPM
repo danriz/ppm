@@ -1,0 +1,27 @@
+select kr.request_id,nt.creation_date, nt.new_visible_column_value
+
+from
+
+kcrt_requests kr,
+
+knta_field_change_notes nt
+
+where
+
+kr.request_id=nt.parent_entity_primary_key
+
+ 
+
+and nt.column_prompt = ‘My field name on admin panel:’
+
+and nt.creation_date >=(select max(nt2.creation_date)
+
+from
+
+knta_field_change_notes nt2
+
+where nt2.column_prompt=’My field name on admin panel:’
+
+and nt2.parent_entity_primary_key=kr.request_id
+
+)
