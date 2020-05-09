@@ -1,0 +1,5 @@
+@echo off
+C:
+cd C:\ppm\bin
+echo %date% %time% >> userload_log.txt
+C:\cygwin\bin\bash.exe kStatus.sh >> userload_log.txt
