@@ -1,0 +1,16 @@
+@echo off
+setlocal enableextensions enabledelayedexpansion
+
+set /a “mon=100”, “tue=100”, “wed=100”, “thu=100”, “fri=100”, “sat=100”, “sun=100”
+set /a “checking=200”, “running=300”
+
+for /f “usebackq tokens=1-8 delims=>-/:. ” %%a in (“c:\ppm\bin\userload_log.txt”) do (
+set /a “id=%%a”
+if !id! equ 100 (
+set “ts=%%a %%b/%%c/%%d %%e:%%f:%%g.%%h;”
+) else if !id! equ 200 (
+set “ppm=%%c;”
+) else if !id! equ 300 (
+echo(!ts!!ppm!%%c
+)
+)
