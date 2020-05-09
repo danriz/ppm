@@ -1,0 +1,10 @@
+updateknta_users ku1 set ku1.manager_user_id=(select ku2.user_id from knta_users ku2 where ku2.username=
+(select d1.delegate_ldap from one_delegation d1 where trunc(sysdate) >= trunc(d1.start_date) and trunc(d1.finish_date)>=trunc(sysdate)
+and d1.delegator_ldap=(Select ku5.username from 
+knta_users ku5 where ku1.manager_user_id=ku5.user_id) and ku1.end_date is null))
+where
+ku1.end_date is null and ku1.manager_user_id =(select ku3.user_id from knta_users ku3 where ku3.username = (
+select d1.delegator_ldap from one_delegation d1 where trunc(sysdate) >= trunc(d1.start_date) and trunc(d1.finish_date)>=trunc(sysdate)
+and d1.delegator_ldap=(Select ku6.username from 
+knta_users ku6 where ku1.manager_user_id=ku6.user_id) and ku1.end_date is null
+))
